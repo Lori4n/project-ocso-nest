@@ -5,6 +5,7 @@ import { AppService } from './app.service.js';
 import { EmployeesModule } from './employees/employees.module.js';
 import { ProductsModule } from './products/products.module.js';
 import { ConfigModule } from '@nestjs/config';
+import { ProvidersModule } from './providers/providers.module.js';
 
 @Module({
   imports: [
@@ -20,7 +21,7 @@ import { ConfigModule } from '@nestjs/config';
     synchronize: true,
   }),
   EmployeesModule, 
-  ProductsModule
+  ProductsModule, ProvidersModule
 ],
   controllers: [AppController],
   providers: [AppService],
