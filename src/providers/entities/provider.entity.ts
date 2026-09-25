@@ -14,6 +14,7 @@ export class Provider {
         nullable: true,
     })
     providerPhoneNumber: string;
+
     @OneToMany(() => Product, (product) => product.provider)
-  products: Product[];
+    products: Product[];
 }

@@ -1,15 +1,12 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm';
 import { RegionsService } from './regions.service.js';
 import { RegionsController } from './regions.controller.js';
-import { Region } from './entities/region.entity.js'; // <-- Importa la entidad Region
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Region } from './entities/region.entity.js';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Region]), // <-- AGREGA ESTA LÍNEA
-  ],
+  imports: [TypeOrmModule.forFeature([Region])],
   controllers: [RegionsController],
   providers: [RegionsService],
-  exports: [TypeOrmModule], // Opcional, por si necesitas usar RegionRepository en otros módulos
 })
 export class RegionsModule {}
