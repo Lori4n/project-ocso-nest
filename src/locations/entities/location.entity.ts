@@ -1,13 +1,13 @@
 import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
 
 @Entity()
-export class location {
+export class Location {
     @PrimaryGeneratedColumn('increment')
     locationId: number;
     @Column('text')
     locationName: string;
     @Column('text')
     locationAddress: string;
-    @Column('array')
+    @Column('simple-array')
     locationLatLng: number[];
 }
