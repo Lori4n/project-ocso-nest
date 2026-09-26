@@ -25,7 +25,12 @@ import { AuthModule } from './auth/auth.module.js';
     synchronize: true,
   }),
   EmployeesModule, 
-  ProductsModule, ProvidersModule, ManagersModule, LocationsModule, RegionsModule, AuthModule
+  ProductsModule, 
+  ProvidersModule, 
+  ManagersModule, 
+  LocationsModule, 
+  RegionsModule, 
+  AuthModule
 ],
   controllers: [AppController],
   providers: [AppService],
