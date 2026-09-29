@@ -4,8 +4,15 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 export class User{
     @PrimaryGeneratedColumn('uuid')
     uderId: string;
+
     @Column('text')
     userEmail: string;
+
     @Column('text')
     userPassword: string;
+
+    @Column('simple-array', {
+        default: "Employee"
+    })
+    userRoles: string[];
 }
