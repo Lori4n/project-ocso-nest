@@ -1,7 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, NotFoundException, UseGuards } from '@nestjs/common';
 import { ProvidersService } from './providers.service.js';
 import { CreateProviderDto } from './dto/create-provider.dto.js';
 import { UpdateProviderDto } from './dto/update-provider.dto.js';
+import { AuthGuard } from '../auth/guards/auth.guard.js';
 
 @Controller('providers')
 export class ProvidersController {
@@ -12,6 +13,7 @@ export class ProvidersController {
     return this.providersService.create(createProviderDto);
   }
 
+  @UseGuards(AuthGuard)
   @Get()
   findAll() {
     return this.providersService.findAll();
