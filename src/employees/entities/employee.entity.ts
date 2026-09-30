@@ -6,19 +6,21 @@ import { User } from "../../auth/entities/user.entity.js";
 export class Employee {
     @PrimaryGeneratedColumn('uuid')
     employeeId: string;
-    @Column({type: 'text'})
-    name: string;
-    @Column({type: 'text'})
-    lastName: string;
-    @Column({type: 'text'})
-    phoneNumber: string;
-    @Column({type: 'text'})
-    email: string;
+    @Column('text')
+    employeeName: string;
+    @Column('text')
+    employeeLastName: string;
+    @Column('text')
+    employeePhoneNumber: string;
+    @Column('text', {
+        unique: true
+    })
+    employeeEmail: string;
     @Column ({
         type: 'text',
         nullable: true
     })
-    photoUrl: string;
+    employeePhoto: string;
 
     @ManyToOne(() => Location, (location) => location.employees)
     @JoinColumn ({
