@@ -4,6 +4,10 @@ import { ApiResponse } from "@nestjs/swagger";
  export const ApiAuth = (() => {
     return applyDecorators(
         ApiResponse({
+            status: 203,
+            description: "Action completed succesfully"
+        }),
+        ApiResponse({
             status: 401,
             description: "Missing or invalid token"
         }),

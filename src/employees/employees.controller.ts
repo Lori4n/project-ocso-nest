@@ -23,7 +23,7 @@ export class EmployeesController {
       employeeName: "Karlo",
       employeeEmail: "karlo@gmail.com",
       employeeLastName: "Paz",
-      employeePhoneNumber: "4423435",
+      employeePhoneNumber: "442677898",
     } as Employee
   })
 
