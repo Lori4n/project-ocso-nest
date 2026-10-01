@@ -29,16 +29,24 @@ export class EmployeesService {
     })
   }
 
-async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
-  const employee = await this.employeeRepository.preload({
-    employeeId: id,
-    ...updateEmployeeDto,
-  });
+  findByLocation(id: number) {
+    return this.employeeRepository.findBy({
+      location: {
+        locationId: id
+      }
+    })
+  }
+
+  async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
+    const employee = await this.employeeRepository.preload({
+      employeeId: id,
+      ...updateEmployeeDto,
+    });
   if (!employee) {
     throw new NotFoundException();
   }
   return await this.employeeRepository.save(employee);
-}
+  }
 
   remove(id: string) {
     this.employeeRepository.delete({
