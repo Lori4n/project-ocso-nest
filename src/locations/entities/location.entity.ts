@@ -9,15 +9,21 @@ export class Location {
     @PrimaryGeneratedColumn('increment')
     locationId: number;
 
-    @ApiProperty()
+    @ApiProperty({
+        example: 'Branch name and location'
+    })
     @Column('text')
     locationName: string;
     
-    @ApiProperty()
+    @ApiProperty({
+        example: 'Physical address'
+    })
     @Column('text')
     locationAddress: string;
 
-    @ApiProperty()
+    @ApiProperty({
+        example: ['Latitude', 'Longitude']
+    })
     @Column('simple-array')
     locationLatLng: number[];
 

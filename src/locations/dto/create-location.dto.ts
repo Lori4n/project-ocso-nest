@@ -12,7 +12,7 @@ export class CreateLocationDto {
     locationName: string;
 
     @ApiProperty({
-        example: "Juriquilla"
+        example: "Ciencias Av, Juriquilla, Qro"
     })
     @IsString()
     @MaxLength(160)
@@ -25,9 +25,7 @@ export class CreateLocationDto {
     @ArrayNotEmpty()
     locationLatLng: number[];
 
-    @ApiPropertyOptional({
-        example: "El Bajio"
-    })
+    @ApiPropertyOptional()
     @IsObject()
     @IsOptional()
     region: Region;
