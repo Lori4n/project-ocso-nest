@@ -2,7 +2,6 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateEmployeeDto } from './dto/create-employee.dto.js';
 import { UpdateEmployeeDto } from './dto/update-employee.dto.js';
 import { Employee } from './entities/employee.entity.js';
-import {v4 as uuid} from "uuid";
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 
@@ -38,14 +37,17 @@ export class EmployeesService {
   }
 
   async update(id: string, updateEmployeeDto: UpdateEmployeeDto) {
-    const employee = await this.employeeRepository.preload({
+    const employeeToUpdate = await this.employeeRepository.preload({
       employeeId: id,
       ...updateEmployeeDto,
     });
-  if (!employee) {
-    throw new NotFoundException();
-  }
-  return await this.employeeRepository.save(employee);
+
+    if (!employeeToUpdate) {
+      throw new NotFoundException(`Employee with id ${id} not found`);
+    }
+
+    this.employeeRepository.save(employeeToUpdate);
+    return employeeToUpdate;
   }
 
   remove(id: string) {

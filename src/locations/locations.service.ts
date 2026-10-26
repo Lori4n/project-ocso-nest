@@ -4,6 +4,7 @@ import { UpdateLocationDto } from './dto/update-location.dto.js';
 import { Repository } from 'typeorm';
 import { Location } from './entities/location.entity.js'
 import { InjectRepository } from '@nestjs/typeorm';
+import { loadAdapter } from '@nestjs/core/internal';
 
 @Injectable()
 export class LocationsService {
@@ -25,6 +26,7 @@ export class LocationsService {
       locationId: id,
     })
     if (!location) throw new NotFoundException ("Location not found")
+      return location;
   }
 
   async update(id: number, updateLocationDto: UpdateLocationDto) {
