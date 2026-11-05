@@ -8,12 +8,13 @@ import { ROLES } from '../auth/constants/roles.constants.js';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Employee } from './entities/employee.entity.js';
 import { ApiAuth } from '../auth/decorators/api.decorator.js';
+import { AwsService } from '../aws/aws.service.js';
 
 @ApiAuth()
 @ApiTags('Employees')
 @Controller('employees')
 export class EmployeesController {
-  constructor(private readonly employeesService: EmployeesService) {}
+  constructor(private readonly employeesService: EmployeesService, private readonly awsService: AwsService) { }
 
   @Auth(ROLES.MANAGER)
   @ApiResponse({
@@ -32,13 +33,16 @@ export class EmployeesController {
     return this.employeesService.create(createEmployeeDto);
   }
 
-  @Auth(ROLES.EMPLOYEE, ROLES.MANAGER)
-  @Post('upload')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadPhoto(@UploadedFile() file: Express.Multer.File){
-    console.log(file.filename);
-    return "ok"
+  @Auth(ROLES.MANAGER, ROLES.EMPLOYEE)
+  @Post(":id/upload")
+  @UseInterceptors(FileInterceptor("file"))
+  async uploadPhoto(@Param('id') id: string, @UploadedFile() file: Express.Multer.File) {
+    const response = await this.awsService.uploadFile(file)
+    return this.employeesService.update(id, {
+      employeePhoto: response
+    })
   }
+
 
   @Auth(ROLES.MANAGER)
   @Get()
@@ -49,7 +53,7 @@ export class EmployeesController {
   @Auth(ROLES.MANAGER)
   @Get('/:id')
   findOne(
-    @Param('id', new ParseUUIDPipe({version: '4'})) 
+    @Param('id', new ParseUUIDPipe({ version: '4' }))
     id: string
   ) {
     return this.employeesService.findOne(id);
@@ -64,13 +68,13 @@ export class EmployeesController {
 
   @Auth(ROLES.EMPLOYEE)
   @Patch(':id')
-  update(@Param('id', new ParseUUIDPipe({version: '4'})) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
+  update(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string, @Body() updateEmployeeDto: UpdateEmployeeDto) {
     return this.employeesService.update(id, updateEmployeeDto);
   }
 
   @Auth(ROLES.MANAGER)
   @Delete(':id')
-  remove(@Param('id', new ParseUUIDPipe({version: '4'})) id: string) {
+  remove(@Param('id', new ParseUUIDPipe({ version: '4' })) id: string) {
     return this.employeesService.remove(id);
   }
 }

@@ -8,6 +8,7 @@ import { ManagersModule } from './managers/managers.module.js';
 import { LocationsModule } from './locations/locations.module.js';
 import { RegionsModule } from './regions/regions.module.js';
 import { AuthModule } from './auth/auth.module.js';
+import { AwsModule } from './aws/aws.module';
 
 @Module({
   imports: [
@@ -28,7 +29,7 @@ import { AuthModule } from './auth/auth.module.js';
   ManagersModule, 
   LocationsModule, 
   RegionsModule, 
-  AuthModule
+  AuthModule, AwsModule
 ],
 })
 export class AppModule {}
