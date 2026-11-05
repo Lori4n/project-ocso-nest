@@ -18,8 +18,8 @@ export class Product {
     countSeal: number;
 
     @ManyToOne(() => Provider, (provider) => provider.products)
-        @JoinColumn({
-            name: "providerId"
-        })
-    provider: Provider;
+    @JoinColumn({
+        name: "providerId"
+    })
+    provider: Provider | string;
 }
