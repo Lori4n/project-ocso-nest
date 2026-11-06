@@ -3,7 +3,7 @@ import { Location } from "../../locations/entities/location.entity";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
 
 
-export class CreateEmployeeDto{
+export class CreateEmployeeDto {
     @ApiProperty({
         example: "Karlo"
     })
@@ -11,22 +11,22 @@ export class CreateEmployeeDto{
     @MaxLength(30)
     employeeName: string;
 
-    
-     @ApiProperty({
+
+    @ApiProperty({
         example: "Paz"
     })
     @IsString()
     @MaxLength(70)
     employeeLastName: string;
 
-     @ApiProperty({
+    @ApiProperty({
         example: "442677898"
     })
     @IsString()
     @MaxLength(10)
     employeePhoneNumber: string;
 
-     @ApiProperty({
+    @ApiProperty({
         example: "karlo@gmail.com"
     })
     @IsString()
@@ -37,4 +37,8 @@ export class CreateEmployeeDto{
     @IsOptional()
     @IsObject()
     location: Location;
+
+    @ApiProperty()
+    @IsOptional()
+    employeePhoto: string;
 }

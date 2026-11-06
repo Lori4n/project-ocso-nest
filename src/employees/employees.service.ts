@@ -11,7 +11,7 @@ export class EmployeesService {
   constructor(
     @InjectRepository(Employee)
     private employeeRepository: Repository<Employee>
-  ){}
+  ) { }
   async create(createEmployeeDto: CreateEmployeeDto) {
     const employee = await this.employeeRepository.save(createEmployeeDto)
     return employee;
@@ -23,9 +23,15 @@ export class EmployeesService {
   }
 
   findOne(id: string) {
-    const employee = this.employeeRepository.findOneBy({
-      employeeId: id
+    const employee = this.employeeRepository.findOne({
+      where: {
+        employeeId: id
+      },
+      relations: {
+        location: true,
+      }
     })
+    return employee;
   }
 
   findByLocation(id: number) {
