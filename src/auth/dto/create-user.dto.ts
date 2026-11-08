@@ -19,6 +19,6 @@ export class CreateUserDto {
         example: "Employee",
     })
     @IsOptional()
-    @IsIn(["Admin","Employee","Manager"])
-    userRoleS: string[]
+    @IsIn(["Admin", "Employee", "Manager"])
+    userRoles: string[]
 }

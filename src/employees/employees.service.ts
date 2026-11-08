@@ -19,7 +19,11 @@ export class EmployeesService {
 
   findAll() {
     // Retorne todos los empleados
-    return this.employeeRepository.find()
+    return this.employeeRepository.find({
+      relations: {
+        location: true
+      }
+    })
   }
 
   findOne(id: string) {
