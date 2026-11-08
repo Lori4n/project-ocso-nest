@@ -1,4 +1,4 @@
-import {Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne} from "typeorm";
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToOne } from "typeorm";
 import { Location } from "../../locations/entities/location.entity.js";
 import { User } from "../../auth/entities/user.entity.js";
 import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
@@ -27,7 +27,7 @@ export class Employee {
     employeeEmail: string;
 
     @ApiProperty()
-    @Column ({
+    @Column({
         type: 'text',
         nullable: true
     })
@@ -35,11 +35,11 @@ export class Employee {
 
     @ApiPropertyOptional()
     @ManyToOne(() => Location, (location) => location.employees)
-    @JoinColumn ({
+    @JoinColumn({
         name: "locationId"
     })
-    location: Location;
-    
+    location: Location | String;
+
     @OneToOne(() => User)
     @JoinColumn({
         name: "userId"
