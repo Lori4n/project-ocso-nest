@@ -4,9 +4,9 @@ import { Employee } from "../../employees/entities/employee.entity.js";
 import { ApiProperty } from "@nestjs/swagger";
 
 @Entity()
-export class User{
+export class User {
     @PrimaryGeneratedColumn('uuid')
-    uderId: string;
+    userId: string;
 
     @ApiProperty()
     @Column('text', {
