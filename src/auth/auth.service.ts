@@ -53,7 +53,7 @@ export class AuthService {
     }
 
     manager.user = user;
-    return this.employeeRepository.save(manager);
+    return this.managerRepository.save(manager);
   }
 
   async loginUser(loginUserDto: LoginUserDto) {

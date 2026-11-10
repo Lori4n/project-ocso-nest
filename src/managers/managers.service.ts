@@ -10,7 +10,7 @@ export class ManagersService {
   constructor(
     @InjectRepository(Manager)
     private managerRepository: Repository<Manager>
-  ) {}
+  ) { }
 
   create(createManagerDto: CreateManagerDto) {
     return this.managerRepository.save(createManagerDto);
@@ -29,6 +29,7 @@ export class ManagersService {
       where: { managerId: id },
       relations: {
         location: true,
+        user: true
       }
     })
     if (!manager) throw new NotFoundException("No manager found")
@@ -40,7 +41,7 @@ export class ManagersService {
       managerId: id,
       ...updateManagerDto
     })
-    if(!managerToUpdate) throw new BadRequestException
+    if (!managerToUpdate) throw new BadRequestException
     return this.managerRepository.save(managerToUpdate)
   }
 
